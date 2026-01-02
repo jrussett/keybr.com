@@ -152,6 +152,12 @@ export class Language implements EnumItem {
     /* direction= */ "ltr",
     /* alphabet= */ "абвгдежзийклмнопрстуфхцчшщъыьэюя",
   );
+  static readonly SA = new language(
+    /* id= */ "sa",
+    /* script= */ "devanagari",
+    /* direction= */ "ltr",
+    /* alphabet= */ "अआइईउऊऋॠऌॡएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह",
+  );
   static readonly SL = new Language(
     /* id= */ "sl",
     /* script= */ "latin",
@@ -209,6 +215,7 @@ export class Language implements EnumItem {
     Language.PT,
     Language.RO,
     Language.RU,
+    Language.SA,
     Language.SL,
     Language.SV,
     Language.TH,
@@ -218,10 +225,11 @@ export class Language implements EnumItem {
 
   /** ISO 639-1 language code, https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes */
   readonly id: string;
-  /** The writing system, such as Cyrillic, Georgian, Greek, Hebrew, Latin, Thai, etc. */
+  /** The writing system, such as Cyrillic, Devanagari, Georgian, Greek, Hebrew, Latin, Thai, etc. */
   readonly script:
     | "arabic"
     | "cyrillic"
+    | "devanagari"
     | "greek"
     | "hebrew"
     | "hiragana"
@@ -249,6 +257,7 @@ export class Language implements EnumItem {
     script:
       | "arabic"
       | "cyrillic"
+      | "devanagari"
       | "greek"
       | "hebrew"
       | "hiragana"
@@ -320,6 +329,19 @@ export class Language implements EnumItem {
         return String.fromCodePoint(/* DOTTED CIRCLE */ 0x25cc, codePoint);
       }
     }
+    if (codePoint >= 0x0900 && codePoint <= 0x097f) {
+      // Devanagari Unicode block
+      if (
+        (codePoint >= 0x093a && codePoint <= 0x093c) ||
+        (codePoint >= 0x093e && codePoint <= 0x094f) ||
+        (codePoint >= 0x0955 && codePoint <= 0x0957) ||
+        (codePoint >= 0x0962 && codePoint <= 0x0963)
+      ) {
+        // Devanagari combining mark
+        return String.fromCodePoint(/* DEVANAGARI SIGN VIRAMA */ 0x094d, codePoint);
+      }
+    }
+
     // Locale-specific uppercase variant of a letter.
     // For example in Turkish there are dotted and dotless letter I,
     // each with its own lower and uppercase variant.
@@ -338,6 +360,8 @@ export class Language implements EnumItem {
         return codePoint >= 0x0600 && codePoint <= 0x06ff;
       case "cyrillic":
         return codePoint >= 0x0400 && codePoint <= 0x04ff;
+      case "devanagari":
+        return codePoint >= 0x0900 && codePoint <= 0x097f;
       case "greek":
         return codePoint >= 0x0370 && codePoint <= 0x03ff;
       case "hebrew":
@@ -376,6 +400,8 @@ export function getExampleText({ script }: Language): string {
       return "تناول المزيد من التفاح والبرتقال.";
     case "cyrillic":
       return "Яжте повече ябълки и портокали.";
+    case "devanagari":
+      return "सत्यमेव जयते।";
     case "greek":
       return "Τρώτε περισσότερα μήλα και πορτοκάλια.";
     case "hebrew":
@@ -395,6 +421,8 @@ export function getExampleLetters({ script }: Language): CodePoint[] {
       return [0x0627, 0x0628, 0x067e, 0x062a, 0x062b, 0x062c];
     case "cyrillic":
       return [0x0430, 0x0431, 0x0432, 0x0433, 0x0434, 0x0435];
+    case "devanagari":
+      return [0x0938, 0x0924, 0x094d, 0x092f, 0x092e, 0x0947];
     case "greek":
       return [0x03b1, 0x03b2, 0x03b3, 0x03b4, 0x03b5, 0x03b6];
     case "hebrew":
