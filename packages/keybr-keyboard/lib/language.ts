@@ -152,11 +152,11 @@ export class Language implements EnumItem {
     /* direction= */ "ltr",
     /* alphabet= */ "абвгдежзийклмнопрстуфхцчшщъыьэюя",
   );
-  static readonly SA = new language(
+  static readonly SA = new Language(
     /* id= */ "sa",
     /* script= */ "devanagari",
     /* direction= */ "ltr",
-    /* alphabet= */ "अआइईउऊऋॠऌॡएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह",
+    /* alphabet= */ "अआाइिईीउुऊूऋृॠॄऌॢॡॣएेऐैओोऔौकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसंँ्ः",
   );
   static readonly SL = new Language(
     /* id= */ "sl",
@@ -338,7 +338,10 @@ export class Language implements EnumItem {
         (codePoint >= 0x0962 && codePoint <= 0x0963)
       ) {
         // Devanagari combining mark
-        return String.fromCodePoint(/* DEVANAGARI SIGN VIRAMA */ 0x094d, codePoint);
+        return String.fromCodePoint(
+          /* DEVANAGARI SIGN VIRAMA */ 0x094d,
+          codePoint,
+        );
       }
     }
 
