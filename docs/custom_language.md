@@ -39,3 +39,23 @@
    Files `packages/keybr-phonetic-model/assets/model-<language-id>.data` and
    `packages/keybr-content-words/lib/data/words-<language-id>.json` should be
    created. These files should be commited along with new language definition.
+4. Add the new language with a reference to the words json to the switch
+   statement in `packages/keybr-content-words/lib/load.ts`:
+   ```
+   case Language.<language-id>:
+    return (
+      await import(
+        /* webpackChunkName: "words-<language-id>" */ "./data/words-<language-id>.json",
+        { with: { type: "json" } }
+      )
+    ).default;
+   ```
+5. Import the new language's data and add a case in the `modelAssetPath` function in `packages/keybr-phonetic-model-loader/lib/assets.ts`:
+```
+import <language-id> from "@keybr/phonetic-model/assets/model-<language-id>.data";
+...
+...
+...
+  case Language.<language-id>:
+    return <language-id>;
+```
