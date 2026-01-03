@@ -99,6 +99,7 @@ for (const [id, layout] of [
   ["pt_pt", importCldr("cldr-keyboards-43.0/keyboards/windows/pt-PT-t-k0-windows.xml")],
   ["ro_ro", importCldr("cldr-keyboards-43.0/keyboards/windows/ro-t-k0-windows.xml")],
   ["ru_ru", importCldr("cldr-keyboards-43.0/keyboards/windows/ru-t-k0-windows.xml")],
+  ["sa_inscript", importCldr("cldr-keyboards-43.0/keyboards/windows/hi-t-k0-windows.xml")],
   ["sl_si", importCldr("cldr-keyboards-43.0/keyboards/windows/sl-t-k0-windows.xml")],
   ["sv_se", importCldr("cldr-keyboards-43.0/keyboards/windows/sv-t-k0-windows.xml")],
   ["th_th", importCldr("cldr-keyboards-43.0/keyboards/windows/th-t-k0-windows.xml")],

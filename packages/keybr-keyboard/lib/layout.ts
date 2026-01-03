@@ -1322,6 +1322,22 @@ export class Layout implements XEnumItem {
     /* geometries= */ new Enum(Geometry.ANSI_101),
   );
 
+  static readonly SA_INSCRIPT = new Layout(
+    /* id= */ "sa-inscript",
+    /* xid= */ 0xb1,
+    /* name= */ "{SA} (InScript)",
+    /* family= */ "inscript",
+    /* language= */ Language.SA,
+    /* emulate= */ true,
+    /* geometries= */ new Enum(
+      Geometry.ISO_102,
+      Geometry.ISO_102_FULL,
+      Geometry.ANSI_101,
+      Geometry.ANSI_101_FULL,
+      Geometry.MATRIX,
+    ),
+  );
+
   static readonly ALL = new XEnum<Layout>(
     Layout.EN_US,
     Layout.EN_DVORAK,
@@ -1402,6 +1418,7 @@ export class Layout implements XEnumItem {
     Layout.PT_BR,
     Layout.PT_PT,
     Layout.BE_BY,
+    Layout.SA_INSCRIPT,
     Layout.SL_SI,
     Layout.SV_SE,
     Layout.UK_UA,
